@@ -32,6 +32,24 @@ def ingest_file(filepath):
     db.save_local("vectorstore")
     print(f"✅ 向量化完成：{filepath}，段落數：{len(texts)}")
 
+def ingest_all():
+    print("📄 掃描資料夾：source_documents")
+    source_dir = "source_documents"
+    documents = []
+    for filename in os.listdir(source_dir):
+        filepath = os.path.join(source_dir, filename)
+        if filename.endswith((".pdf", ".txt", ".docx")):
+            documents.extend(load_single_document(filepath))
+    if not documents:
+        print("⚠️ 未找到任何可處理文件。")
+        return
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
+    texts = text_splitter.split_documents(documents)
+    embeddings = OpenAIEmbeddings()
+    db = FAISS.from_documents(texts, embeddings)
+    db.save_local("vectorstore")
+    print(f"✅ 向量化完成，共處理段落數：{len(texts)}")
+
 if __name__ == "__main__":
     ingest_all()
 
