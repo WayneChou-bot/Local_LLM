@@ -21,7 +21,6 @@ def get_answer(query, llm):
     qa = RetrievalQA.from_chain_type(
         llm=llm,
         retriever=retriever,
-        return_source_documents=True
     )
     result = qa({"query": query})
     return result['result'], result['source_documents']
