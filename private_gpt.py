@@ -21,8 +21,10 @@ def get_answer(query, llm):
     qa = RetrievalQA.from_chain_type(
         llm=llm,
         retriever=retriever,
-        return_source_documents=True  # ⭐ 必加這行才能回傳來源文件
+        return_source_documents=True
     )
+    result = qa({"query": query})
+    return result['result'], result['source_documents']
 
     try:
         result = qa(query)
