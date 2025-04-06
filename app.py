@@ -253,8 +253,8 @@ if st.session_state.query_to_process:
                     for doc in sources:
                         filename = os.path.basename(doc.metadata.get("source", "未知來源"))  # 👈 重點：只取檔名
                         st.markdown(f"- {filename}")
-                else:
-                    st.info("未能從知識庫文件中找到直接相關的參考來源。")
+                    else:
+                        st.info("未能從知識庫文件中找到直接相關的參考來源。")
                     # 檢查 sources 是否可迭代且包含有效的 doc 物件
                     if isinstance(sources, list):
                          for doc in sources:
