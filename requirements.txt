@@ -1,6 +1,7 @@
 streamlit>=1.31.0
 openai>=1.14.3
 langchain>=0.1.14
+langchain-community>=0.0.19
 faiss-cpu>=1.7.4
 python-dotenv>=1.0.1
 Pillow>=10.2.0
