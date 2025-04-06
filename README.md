@@ -1,6 +1,6 @@
-# 🧠 私有文件問答系統（RAG + ChatGPT + Streamlit）
+# 🧠 私有智慧問答系統（RAG + ChatGPT + Streamlit）
 
-這是一個結合 RAG 架構與 GPT-4o 的企業內部文件問答系統，使用者可於網頁介面輸入問題，即可查詢 PDF/TXT/DOCX 文件並獲得智慧回答。
+這是一個結合 RAG 架構與 ChatGPT 的企業內部文件問答系統，使用者可於網頁介面輸入問題，即可查詢 PDF/TXT/DOCX 文件並獲得智慧回答。
 
 ## ✨ 系統特色
 - GPT-4o 模型回答
