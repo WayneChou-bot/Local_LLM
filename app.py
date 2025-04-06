@@ -256,7 +256,7 @@ if st.session_state.query_to_process:
                          for doc in sources:
                              # 檢查 doc 是否有 metadata 屬性且 metadata 是字典
                              if hasattr(doc, 'metadata') and isinstance(doc.metadata, dict):
-                                 source_path = doc.metadata.get("未知來源")
+                                 source_path = doc.metadata.get("source", "未知來源")
                                  source_name = os.path.basename(source_path) # 只取文件名
                                  if source_name not in source_list:
                                      source_list.append(source_name)
