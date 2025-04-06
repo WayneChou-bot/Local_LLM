@@ -30,8 +30,8 @@ def get_answer(query, llm):
         result = qa(query)
         return result["result"], result.get("source_documents", [])
     except APIConnectionError:
-        return "⚠️ 無法連線至 OpenAI API", []
+        return "⚠️ 無法連線", []
     except AuthenticationError:
-        return "❌ OpenAI API 金鑰錯誤", []
+        return "❌ 金鑰錯誤", []
     except OpenAIError as e:
-        return f"🚨 OpenAI 錯誤：{e}", []
+        return f"🚨 LLM 錯誤：{e}", []
