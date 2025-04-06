@@ -249,19 +249,15 @@ if st.session_state.query_to_process:
                 # 顯示來源（修正後的版本）
                 if sources:
                     st.subheader("📄 參考來源")
-                    source_list = []
-                    if isinstance(sources, list):
+                    unique_sources = set()
                         for doc in sources:
                             if hasattr(doc, 'metadata') and isinstance(doc.metadata, dict):
-                                source_path = doc.metadata.get("source", "未知來源")
-                                # 只取文件名，去除路徑和 source_documents\ 前綴
-                                source_name = os.path.basename(source_path)
-                                if source_name not in source_list:
-                                    source_list.append(source_name)
+                                source_name = doc.metadata.get("source", "未知來源")
+                                unique_sources.add(source_name)
                         
-                        if source_list:
-                            for name in source_list:
-                                st.markdown(f"- {name}")  # 簡化顯示，不加粗體
+                        if unique_sources:
+                            for name in sorted(unique_sources):
+                                st.markdown(f"- {name}")
                         else:
                             st.info("ℹ️ 回答已生成，但未能解析出參考來源。")
                     else:
