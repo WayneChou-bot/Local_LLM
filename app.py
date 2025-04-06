@@ -1,4 +1,4 @@
-# ✅ app.py：支援深色 UI、自動向量化、穩定問答與「提交後清空輸入框」 - 修正 IndentationError
+# ✅ app.py：支援深色 UI、自動向量化、穩定問答與「提交後清空輸入框」 - 修正 TypeError
 import streamlit as st
 import os
 import time # 用於模擬處理延遲 (如果需要)
@@ -246,22 +246,31 @@ if st.session_state.query_to_process:
                 # 顯示回答
                 st.markdown(f"<div class='response-box'>{response}</div>", unsafe_allow_html=True)
 
-                # 顯示來源（修正後的版本）
+                # 顯示來源
                 if sources:
                     st.subheader("📄 參考來源")
-                    seen_sources = set()
-                    for doc in sources:
-                        if hasattr(doc, 'metadata'):
-                            source_name = doc.metadata.get('source', '未知來源')
-                            if source_name not in seen_sources:
-                                seen_sources.add(source_name)
-                                st.markdown(f"- 📄 {source_name}")
-                        if not seen_sources:
-                            st.info("ℹ️ 回答已生成，但未能識別具體來源文件。")
-                        else:
-                            st.info("ℹ️ 回答已生成，但未能解析出參考來源。")
+                    source_list = []
+                    # 檢查 sources 是否可迭代且包含有效的 doc 物件
+                    if isinstance(sources, list):
+                         for doc in sources:
+                             # 檢查 doc 是否有 metadata 屬性且 metadata 是字典
+                             if hasattr(doc, 'metadata') and isinstance(doc.metadata, dict):
+                                 source_path = doc.metadata.get("source", "未知來源")
+                                 source_name = os.path.basename(source_path) # 只取文件名
+                                 if source_name not in source_list:
+                                     source_list.append(source_name)
+                             else:
+                                 # 如果 doc 結構不符合預期，可以記錄或跳過
+                                 st.warning("偵測到來源文件結構異常，部分來源可能無法顯示。")
+
+                         if source_list:
+                             for name in source_list:
+                                 clean_name = os.path.basename(name)  # 再次確保只取檔名
+                                 st.markdown(f"- **{clean_name}**")  # 更清楚且美觀
+                         else:
+                             st.info("ℹ️ 回答已生成，但未能從知識庫文件中解析出明確的參考來源檔名。")
                     else:
-                        st.info("ℹ️ 回答已生成，但來源資訊格式非預期列表。")
+                         st.info("ℹ️ 回答已生成，但來源資訊格式非預期列表。")
                 else:
                     st.info("ℹ️ 未能從知識庫文件中找到直接相關的參考來源。")
 
