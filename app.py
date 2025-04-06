@@ -242,10 +242,9 @@ if st.session_state.query_to_process:
             try:
                 # 執行查詢，傳入 llm 參數
                 response, sources = get_answer(current_query, llm)
-                
                 # 顯示回答
                 st.markdown(f"<div class='response-box'>{response}</div>", unsafe_allow_html=True)
-
+                
                 # 顯示來源
                 if sources:
                     st.subheader("📄 參考來源")
