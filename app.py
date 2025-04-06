@@ -250,11 +250,6 @@ if st.session_state.query_to_process:
                 if sources:
                     st.subheader("📄 參考來源")
                     source_list = []
-                    for doc in sources:
-                        filename = os.path.basename(doc.metadata.get("source", "未知來源"))  # 👈 重點：只取檔名
-                        st.markdown(f"- {filename}")
-                    else:
-                        st.info("未能從知識庫文件中找到直接相關的參考來源。")
                     # 檢查 sources 是否可迭代且包含有效的 doc 物件
                     if isinstance(sources, list):
                          for doc in sources:
@@ -271,7 +266,7 @@ if st.session_state.query_to_process:
                          if source_list:
                              for name in source_list:
                                  clean_name = os.path.basename(name)  # 再次確保只取檔名
-                                 st.markdown(f"- **{clean_name}**")  # 更清楚且美觀
+
                          else:
                              st.info("ℹ️ 回答已生成，但未能從知識庫文件中解析出明確的參考來源檔名。")
                     else:
