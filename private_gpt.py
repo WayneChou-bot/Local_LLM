@@ -21,9 +21,9 @@ def get_answer(query, llm):
     try:
         result = qa(query)
         return result["result"], result.get("source_documents", [])
-    except openai.error.APIConnectionError:
-        return "⚠️ 無法連線，請檢查網路。", []
-    except openai.error.AuthenticationError:
-        return "❌ 金鑰錯誤，請重新設定。", []
-    except Exception as e:
-        return f"🚨 發生未知錯誤：{str(e)}", []
+    except APIConnectionError:
+        return "⚠️ 無法連線至 OpenAI API", []
+    except AuthenticationError:
+        return "❌ OpenAI API 金鑰錯誤", []
+    except OpenAIError as e:
+        return f"🚨 OpenAI 錯誤：{e}", []
