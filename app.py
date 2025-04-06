@@ -127,7 +127,7 @@ def submit_query():
 with st.sidebar:
     # st.image("path/to/your/logo.png", width=100) # 可在此處放置 Logo
     st.markdown("<div class='main-title'>🧠 智慧問答助手</div>", unsafe_allow_html=True)
-    st.markdown("<div class='sub-title'>基於您內部文件的 AI 問答</div>", unsafe_allow_html=True)
+    st.markdown("<div class='sub-title'>基於內部文件的 AI 問答</div>", unsafe_allow_html=True)
     st.markdown("---")
 
     st.subheader("💬 問題提問")
@@ -266,7 +266,7 @@ if st.session_state.query_to_process:
                          if source_list:
                              for name in source_list:
                                  clean_name = os.path.basename(name)  # 再次確保只取檔名
-                                 st.markdown(f"- 📄 **{clean_name}**")  # 更清楚且美觀
+                                 st.markdown(f"- **{clean_name}**")  # 更清楚且美觀
                          else:
                              st.info("ℹ️ 回答已生成，但未能從知識庫文件中解析出明確的參考來源檔名。")
                     else:
