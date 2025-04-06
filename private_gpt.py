@@ -6,7 +6,8 @@ from langchain.chat_models import ChatOpenAI
 from dotenv import load_dotenv
 import os
 import openai
-from openai.error import OpenAIError, APIConnectionError, AuthenticationError
+from openai import OpenAIError
+from openai._exceptions import APIConnectionError, AuthenticationError
 
 load_dotenv()
 
