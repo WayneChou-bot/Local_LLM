@@ -250,10 +250,10 @@ if st.session_state.query_to_process:
                 if sources:
                     st.subheader("📄 參考來源")
                     unique_sources = set()
-                        for doc in sources:
-                            if hasattr(doc, 'metadata') and isinstance(doc.metadata, dict):
-                                source_name = doc.metadata.get("source", "未知來源")
-                                unique_sources.add(source_name)
+                    for doc in sources:
+                        if hasattr(doc, 'metadata') and isinstance(doc.metadata, dict):
+                            source_name = doc.metadata.get("source", "未知來源")
+                            unique_sources.add(source_name)
                         
                         if unique_sources:
                             for name in sorted(unique_sources):
