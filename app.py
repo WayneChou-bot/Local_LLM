@@ -260,11 +260,11 @@ if st.session_state.query_to_process:
                                 if source_name not in source_list:
                                     source_list.append(source_name)
                     
-                    if source_list:
-                        for name in source_list:
-                            st.markdown(f"- {name}")  # 簡化顯示，不加粗體
-                    else:
-                        st.info("ℹ️ 回答已生成，但未能解析出參考來源。")
+                        if source_list:
+                            for name in source_list:
+                                st.markdown(f"- {name}")  # 簡化顯示，不加粗體
+                        else:
+                            st.info("ℹ️ 回答已生成，但未能解析出參考來源。")
                          else:
                              st.info("ℹ️ 回答已生成，但未能從知識庫文件中解析出明確的參考來源檔名。")
                     else:
