@@ -24,11 +24,11 @@ def get_answer(query, llm):
         return_source_documents=True
     )
     result = qa({"query": query})
-    return result['result'], result['source_documents']
+    return result['source_documents']
 
     try:
         result = qa(query)
-        return result["result"], result.get([])
+        return result["result"], result.get("source_documents", [])
     except APIConnectionError:
         return "⚠️ 無法連線至 OpenAI API", []
     except AuthenticationError:
