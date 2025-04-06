@@ -7,7 +7,9 @@ from ingest import ingest_file
 
 # 檢查向量資料夾是否已存在，如果不存在就執行 ingest
 if not os.path.exists("vectorstore/index.faiss"):
-    ingest_file()
+    with st.spinner("正在建立知識庫，請稍候... (這可能需要一些時間)"):
+        ingest_file()
+    st.success("知識庫建立完成！")
 
 # --- 假設的導入 (請根據你的專案結構確認) ---
 # 確保這些導入路徑和函數名稱與你的 'private_gpt' 和 'ingest' 模組一致
