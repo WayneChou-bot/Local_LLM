@@ -18,7 +18,11 @@ def get_answer(query, llm):
     embeddings = OpenAIEmbeddings()
     db = FAISS.load_local("vectorstore", embeddings, allow_dangerous_deserialization=True)
     retriever = db.as_retriever()
-    qa = RetrievalQA.from_chain_type(llm=llm, retriever=retriever)
+    qa = RetrievalQA.from_chain_type(
+        llm=llm,
+        retriever=retriever,
+        return_source_documents=True  # ⭐ 必加這行才能回傳來源文件
+    )
 
     try:
         result = qa(query)
