@@ -5,4 +5,4 @@ langchain-community>=0.0.19
 faiss-cpu>=1.7.4
 python-dotenv>=1.0.1
 Pillow>=10.2.0
-tiktoken
+tiktoken>=0.5.1
