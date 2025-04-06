@@ -23,7 +23,7 @@ def get_answer(query, llm):
         retriever=retriever,
     )
     result = qa({"query": query})
-    return result['result'], result['source_documents']
+    return result['result']
 
     try:
         result = qa(query)
