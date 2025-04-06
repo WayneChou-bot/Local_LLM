@@ -266,7 +266,8 @@ if st.session_state.query_to_process:
 
                          if source_list:
                              for name in source_list:
-                                 st.markdown(f"")  # 更清楚且美觀
+                                 clean_name = os.path.basename(name)  # 再次確保只取檔名
+                                 st.markdown(f"- **{clean_name}**")  # 更清楚且美觀
                          else:
                              st.info("ℹ️ 回答已生成，但未能從知識庫文件中解析出明確的參考來源檔名。")
                     else:
