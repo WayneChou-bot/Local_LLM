@@ -24,7 +24,7 @@ def get_answer(query, llm):
         return_source_documents=True
     )
     result = qa({"query": query})
-    return result['source_documents']
+    return result['result'], result['source_documents']
 
     try:
         result = qa(query)
