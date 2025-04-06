@@ -33,7 +33,7 @@ OPENAI_API_KEY=your-key
 EMBEDDING_PROVIDER=openai
 EMBEDDING_MODEL_NAME=text-embedding-3-small
 LLM_PROVIDER=openai
-MODEL_NAME=gpt-4o
+MODEL_NAME=gpt-4o-mini
 ```
 
 ## 📁 專案結構
