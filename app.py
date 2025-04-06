@@ -3,11 +3,11 @@ import streamlit as st
 import os
 import time # 用於模擬處理延遲 (如果需要)
 from PIL import Image # 如果需要顯示 Logo
-from ingest import ingest_file
+from ingest import ingest_all
 
 # 檢查向量資料夾是否已存在，如果不存在就執行 ingest
 if not os.path.exists("vectorstore/index.faiss"):
-    ingest_file()
+    ingest_all()
 
 # --- 假設的導入 (請根據你的專案結構確認) ---
 # 確保這些導入路徑和函數名稱與你的 'private_gpt' 和 'ingest' 模組一致
