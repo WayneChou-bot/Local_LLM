@@ -49,8 +49,7 @@ MODEL_NAME=gpt-4o
 ```
 
 ## 🙌 作者
-- 士驊（Shih-Hua）
-- LinkedIn: [你的 LinkedIn 連結]
+- Wayne Chou
 
-- ### 📚 致謝
+### 📚 致謝
 本專案靈感源自 [privateGPT](https://github.com/imartinez/privateGPT)，並基於其架構重構成簡潔的企業級版本。
