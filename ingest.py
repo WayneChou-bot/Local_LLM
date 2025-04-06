@@ -22,6 +22,19 @@ def load_single_document(filepath):
         raise ValueError("Unsupported file type")
     return loader.load()
 
+def ingest_file(filepath):
+    docs = load_single_document(filepath)
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
+    texts = text_splitter.split_documents(docs)
+    embeddings = OpenAIEmbeddings()
+    if os.path.exists("vectorstore/index.faiss"):
+        db = FAISS.load_local("vectorstore", embeddings, allow_dangerous_deserialization=True)
+        db.add_documents(texts)
+    else:
+        db = FAISS.from_documents(texts, embeddings)
+    db.save_local("vectorstore")
+    print(f"✅ 向量化完成：{filepath}，段落數：{len(texts)}")
+
 def ingest_all():
     st.info("📄 開始處理文件資料夾...")
     
