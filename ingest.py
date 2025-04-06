@@ -21,7 +21,7 @@ def load_single_document(filepath):
 
 def ingest_file(filepath):
     docs = load_single_document(filepath)
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
     texts = text_splitter.split_documents(docs)
     embeddings = OpenAIEmbeddings()
     if os.path.exists("vectorstore/index.faiss"):
@@ -43,7 +43,7 @@ def ingest_all():
     if not documents:
         print("⚠️ 未找到任何可處理文件。")
         return
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=800, chunk_overlap=100)
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
     texts = text_splitter.split_documents(documents)
     embeddings = OpenAIEmbeddings()
     db = FAISS.from_documents(texts, embeddings)
