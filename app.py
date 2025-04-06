@@ -1,4 +1,4 @@
-# ✅ app.py：支援深色 UI、自動向量化、穩定問答與「提交後清空輸入框」 - 修正 TypeError
+# ✅ app.py：支援深色 UI、自動向量化、穩定問答與「提交後清空輸入框」 - 修正 IndentationError
 import streamlit as st
 import os
 import time # 用於模擬處理延遲 (如果需要)
@@ -246,8 +246,7 @@ if st.session_state.query_to_process:
                 # 顯示回答
                 st.markdown(f"<div class='response-box'>{response}</div>", unsafe_allow_html=True)
 
-                # 顯示來源
-                # 顯示來源（修改後版本）
+                # 顯示來源（修正後的版本）
                 if sources:
                     st.subheader("📄 參考來源")
                     source_list = []
@@ -259,16 +258,14 @@ if st.session_state.query_to_process:
                                 source_name = os.path.basename(source_path)
                                 if source_name not in source_list:
                                     source_list.append(source_name)
-                    
-                            if source_list:
-                                for name in source_list:
-                                    st.markdown(f"- {name}")  # 簡化顯示，不加粗體
-                            else:
-                                st.info("ℹ️ 回答已生成，但未能解析出參考來源。")
-                         else:
-                             st.info("ℹ️ 回答已生成，但未能從知識庫文件中解析出明確的參考來源檔名。")
+                        
+                        if source_list:
+                            for name in source_list:
+                                st.markdown(f"- {name}")  # 簡化顯示，不加粗體
+                        else:
+                            st.info("ℹ️ 回答已生成，但未能解析出參考來源。")
                     else:
-                         st.info("ℹ️ 回答已生成，但來源資訊格式非預期列表。")
+                        st.info("ℹ️ 回答已生成，但來源資訊格式非預期列表。")
                 else:
                     st.info("ℹ️ 未能從知識庫文件中找到直接相關的參考來源。")
 
