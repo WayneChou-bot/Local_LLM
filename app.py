@@ -247,26 +247,24 @@ if st.session_state.query_to_process:
                 st.markdown(f"<div class='response-box'>{response}</div>", unsafe_allow_html=True)
 
                 # 顯示來源
+                # 顯示來源（修改後版本）
                 if sources:
                     st.subheader("📄 參考來源")
                     source_list = []
-                    # 檢查 sources 是否可迭代且包含有效的 doc 物件
                     if isinstance(sources, list):
-                         for doc in sources:
-                             # 檢查 doc 是否有 metadata 屬性且 metadata 是字典
-                             if hasattr(doc, 'metadata') and isinstance(doc.metadata, dict):
-                                 source_path = doc.metadata.get("source", "未知來源")
-                                 source_name = os.path.basename(source_path) # 只取文件名
-                                 if source_name not in source_list:
-                                     source_list.append(source_name)
-                             else:
-                                 # 如果 doc 結構不符合預期，可以記錄或跳過
-                                 st.warning("偵測到來源文件結構異常，部分來源可能無法顯示。")
-
-                         if source_list:
-                             for name in source_list:
-                                 clean_name = os.path.basename(name)  # 再次確保只取檔名
-                                 st.markdown(f"- **{clean_name}**")  # 更清楚且美觀
+                        for doc in sources:
+                            if hasattr(doc, 'metadata') and isinstance(doc.metadata, dict):
+                                source_path = doc.metadata.get("source", "未知來源")
+                                # 只取文件名，去除路徑和 source_documents\ 前綴
+                                source_name = os.path.basename(source_path)
+                                if source_name not in source_list:
+                                    source_list.append(source_name)
+                    
+                    if source_list:
+                        for name in source_list:
+                            st.markdown(f"- {name}")  # 簡化顯示，不加粗體
+                    else:
+                        st.info("ℹ️ 回答已生成，但未能解析出參考來源。")
                          else:
                              st.info("ℹ️ 回答已生成，但未能從知識庫文件中解析出明確的參考來源檔名。")
                     else:
