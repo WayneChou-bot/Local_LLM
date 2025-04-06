@@ -21,23 +21,29 @@ def clean_source_path(source_path):
 def get_answer(query, llm):
     embeddings = OpenAIEmbeddings()
     db = FAISS.load_local("vectorstore", embeddings, allow_dangerous_deserialization=True)
-    retriever = db.as_retriever()
+    retriever = db.as_retriever(search_kwargs={"k": 3})  # 限制返回結果數量
+    
     qa = RetrievalQA.from_chain_type(
         llm=llm,
+        chain_type="stuff",
         retriever=retriever,
         return_source_documents=True
     )
 
     try:
-        result = qa(query)
-        # 處理來源文件，去除路徑前綴
-        cleaned_sources = []
-        for doc in result.get("source_documents", []):
-            if hasattr(doc, 'metadata') and 'source' in doc.metadata:
-                doc.metadata['source'] = clean_source_path(doc.metadata['source'])
-            cleaned_sources.append(doc)
+        result = qa({"query": query})
+        # 去重處理
+        unique_sources = set()
+        cleaned_docs = []
+        for doc in result["source_documents"]:
+            if hasattr(doc, 'metadata'):
+                # 徹底清理路徑
+                doc.metadata['source'] = os.path.basename(doc.metadata.get('source', ''))
+                if doc.metadata['source'] not in unique_sources:
+                    unique_sources.add(doc.metadata['source'])
+                    cleaned_docs.append(doc)
         
-        return result["result"], cleaned_sources
+        return result["result"], cleaned_docs
     except APIConnectionError:
         return "⚠️ 無法連線至 OpenAI API", []
     except AuthenticationError:
