@@ -241,8 +241,9 @@ if st.session_state.query_to_process:
         with st.spinner("⏳ AI 正在思考中，請稍候..."):
             try:
                 # 執行查詢，傳入 llm 參數
-                response, sources = get_answer(current_query, llm)
-
+                result = qa({"query": current_query})
+                response = result['result']
+                sources = result['source_documents']
                 # 顯示回答
                 st.markdown(f"<div class='response-box'>{response}</div>", unsafe_allow_html=True)
 
