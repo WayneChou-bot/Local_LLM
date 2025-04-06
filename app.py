@@ -256,16 +256,17 @@ if st.session_state.query_to_process:
                              # 檢查 doc 是否有 metadata 屬性且 metadata 是字典
                              if hasattr(doc, 'metadata') and isinstance(doc.metadata, dict):
                                  source_path = doc.metadata.get("source", "未知來源")
-
+                                 source_name = os.path.basename(name) # 只取文件名
                                  if source_name not in source_list:
-                                     source_list.append(source_path)
+                                     source_list.append(source_name)
                              else:
                                  # 如果 doc 結構不符合預期，可以記錄或跳過
                                  st.warning("偵測到來源文件結構異常，部分來源可能無法顯示。")
 
                          if source_list:
                              for name in source_list:
-                                 st.markdown(f"- **{source_path}**")  # 更清楚且美觀
+                                 clean_name = os.path.basename(name)  # 再次確保只取檔名
+                                 st.markdown(f"- **{clean_name}**")  # 更清楚且美觀
                          else:
                              st.info("ℹ️ 回答已生成，但未能從知識庫文件中解析出明確的參考來源檔名。")
                     else:
