@@ -28,7 +28,7 @@ def get_answer(query, llm):
 
     try:
         result = qa(query)
-        return result["result"], result.get("source_documents", [])
+        return result["result"], result.get([])
     except APIConnectionError:
         return "⚠️ 無法連線至 OpenAI API", []
     except AuthenticationError:
