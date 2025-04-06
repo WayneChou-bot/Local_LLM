@@ -3,17 +3,17 @@ import streamlit as st
 import os
 import time # 用於模擬處理延遲 (如果需要)
 from PIL import Image # 如果需要顯示 Logo
-from ingest import ingest_all
+from ingest import ingest_file
 
 # 檢查向量資料夾是否已存在，如果不存在就執行 ingest
 if not os.path.exists("vectorstore/index.faiss"):
-    ingest_all()
+    ingest_file()
 
 # --- 假設的導入 (請根據你的專案結構確認) ---
 # 確保這些導入路徑和函數名稱與你的 'private_gpt' 和 'ingest' 模組一致
 try:
     from private_gpt import load_llm, get_answer
-    from ingest import ingest_all
+    from ingest import ingest_file
 except ImportError as e:
     st.error(f"無法導入必要的模組 (private_gpt, ingest): {e}")
     st.info("請確保 'private_gpt.py' 和 'ingest.py' 文件存在於專案目錄或 Python 路徑中，並且包含所需的 'load_llm', 'get_answer', 'ingest_file' 函數。")
