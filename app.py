@@ -249,7 +249,7 @@ if st.session_state.query_to_process:
                 # 顯示來源
                 if sources:
                     st.subheader("📄 參考來源")
-                    source_list = []
+                    
                     # 檢查 sources 是否可迭代且包含有效的 doc 物件
                     if isinstance(sources, list):
                          for doc in sources:
