@@ -8,16 +8,16 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# 在 ingest.py 的 load_single_document 函數中添加
 def load_single_document(filepath):
-    # ... 保持原有文件類型判斷邏輯 ...
-    docs = loader.load()
-    # 強制規範化 metadata
-    for doc in docs:
-        if not hasattr(doc, 'metadata'):
-            doc.metadata = {}
-        doc.metadata['source'] = os.path.basename(filepath)  # 只存文件名
-    return docs
+    if filepath.endswith(".pdf"):
+        loader = PyMuPDFLoader(filepath)
+    elif filepath.endswith(".txt"):
+        loader = TextLoader(filepath)
+    elif filepath.endswith(".docx"):
+        loader = Docx2txtLoader(filepath)
+    else:
+        raise ValueError("Unsupported file type")
+    return loader.load()
 
 def ingest_file(filepath):
     docs = load_single_document(filepath)
