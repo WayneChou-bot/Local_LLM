@@ -13,7 +13,7 @@ if not os.path.exists("vectorstore/index.faiss"):
 # 確保這些導入路徑和函數名稱與你的 'private_gpt' 和 'ingest' 模組一致
 try:
     from private_gpt import load_llm, get_answer
-    from ingest import ingest_file
+    from ingest import ingest_all
 except ImportError as e:
     st.error(f"無法導入必要的模組 (private_gpt, ingest): {e}")
     st.info("請確保 'private_gpt.py' 和 'ingest.py' 文件存在於專案目錄或 Python 路徑中，並且包含所需的 'load_llm', 'get_answer', 'ingest_file' 函數。")
