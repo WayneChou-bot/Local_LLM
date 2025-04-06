@@ -12,7 +12,7 @@ from openai._exceptions import APIConnectionError, AuthenticationError
 load_dotenv()
 
 def load_llm():
-    return ChatOpenAI(temperature=0, model_name="gpt-4o")
+    return ChatOpenAI(temperature=0.5, model_name="gpt-4o")
 
 def get_answer(query, llm):
     embeddings = OpenAIEmbeddings()
