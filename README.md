@@ -1,4 +1,4 @@
-# 🧠 智慧問答系統（RAG + ChatGPT + Streamlit）
+# 🧠 企業智慧問答系統（RAG + ChatGPT + Streamlit）
 
 這是一個結合 RAG 架構與 ChatGPT 的企業內部文件問答系統，使用者可於網頁介面輸入問題，即可查詢 PDF/TXT/DOCX 文件並獲得智慧回答。
 
