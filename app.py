@@ -121,7 +121,7 @@ def submit_query():
 # --- Sidebar ---
 with st.sidebar:
     # st.image("path/to/your/logo.png", width=100) # Optionally display a logo here
-    st.markdown("<div class='main-title'>🧠 Smart Q&A Assistant</div>", unsafe_allow_html=True)
+    st.markdown("<div class='main-title'>🧠 Intelligent Q&A Assistant</div>", unsafe_allow_html=True)
     st.markdown("<div class='sub-title'>AI-powered Q&A based on internal documents</div>", unsafe_allow_html=True)
     st.markdown("---")
 
